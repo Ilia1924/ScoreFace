@@ -6,7 +6,7 @@ import axios from "axios";
 const BASE_URL =
   "https://www.thesportsdb.com/api/v1/json/3/search_all_leagues.php?c=England&s=Soccer";
 
-export default function HomePage() {
+export default function HomePage({ onLike, likedCards }) {
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
 
@@ -29,8 +29,15 @@ export default function HomePage() {
         {error ? (
           <p>Error loading data: {error.message}</p>
         ) : (
-          data?.map((card) => (
-            <RecipeReviewCard key={card.idLeague} card={card} />
+          data.map((card) => (
+            <RecipeReviewCard
+              key={card.idLeague}
+              card={card}
+              onLike={onLike}
+              isLiked={likedCards.some(
+                (likedCard) => likedCard.idLeague === card.idLeague
+              )}
+            />
           ))
         )}
       </div>

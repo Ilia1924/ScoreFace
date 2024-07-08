@@ -1,6 +1,3 @@
-//
-
-// Card.js
 import React from "react";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
@@ -17,7 +14,6 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { useLikedCards } from "./LikedCardsContext";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -30,19 +26,11 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function RecipeReviewCard({ card }) {
+export default function RecipeReviewCard({ card, onLike, isLiked }) {
   const [expanded, setExpanded] = React.useState(false);
-  const { likedCards, addCard, removeCard } = useLikedCards();
-  const isLiked = likedCards.some(
-    (likedCard) => likedCard.idLeague === card.idLeague
-  );
 
   const handleClickLike = () => {
-    if (isLiked) {
-      removeCard(card.idLeague);
-    } else {
-      addCard(card);
-    }
+    onLike(card);
   };
 
   const handleExpandClick = () => {
@@ -76,7 +64,6 @@ export default function RecipeReviewCard({ card }) {
         }
         alt="Paella dish"
       />
-
       <CardActions disableSpacing>
         <IconButton
           aria-label="add to favorites"
