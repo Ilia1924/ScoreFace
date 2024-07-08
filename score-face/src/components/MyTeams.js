@@ -14,7 +14,7 @@ export default function MyTeams() {
           <p>No liked teams yet.</p>
         ) : (
           likedCards.map((card) => (
-            <RecipeReviewCard key={card.idLeague} card={card} />
+            <RecipeReviewCard key={card.idLeague} card={card}/>
           ))
         )}
       </div>
