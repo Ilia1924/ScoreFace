@@ -1,6 +1,10 @@
 import React from "react";
 import { DndContext, closestCenter } from "@dnd-kit/core";
-import { arrayMove, SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
+import {
+  arrayMove,
+  SortableContext,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
 import DraggableCard from "./DraggableCard";
 
 export default function MyTeams({ likedCards, setLikedCards }) {
@@ -23,21 +27,29 @@ export default function MyTeams({ likedCards, setLikedCards }) {
   return (
     <div>
       <h1>My Teams</h1>
-      <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-        <SortableContext
-          items={likedCards.map((item) => item.idLeague)}
-          strategy={verticalListSortingStrategy}
+      {likedCards.length ? (
+        <DndContext
+          collisionDetection={closestCenter}
+          onDragEnd={handleDragEnd}
         >
-          {likedCards.map((card) => (
-            <DraggableCard
-              key={card.idLeague}
-              card={card}
-              id={card.idLeague}
-              onUnlike={handleUnlike}
-            />
-          ))}
-        </SortableContext>
-      </DndContext>
+          <SortableContext
+            items={likedCards.map((item) => item.idLeague)}
+            strategy={verticalListSortingStrategy}
+          >
+            {likedCards.map((card) => (
+              <DraggableCard
+                key={card.idLeague}
+                card={card}
+                id={card.idLeague}
+                onUnlike={handleUnlike}
+                isLiked={true}
+              />
+            ))}
+          </SortableContext>
+        </DndContext>
+      ) : (
+        "Here will be your favorite teams"
+      )}
     </div>
   );
 }

@@ -51,7 +51,7 @@ export default function RecipeReviewCard({ card, onLike, isLiked }) {
           </IconButton>
         }
         title={card.strLeague}
-        subheader="September 14, 2016"
+        // subheader="September 14, 2016"
       />
       <CardMedia
         component="img"

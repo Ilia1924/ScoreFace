@@ -3,14 +3,9 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import RecipeReviewCard from "./Card";
 
-export default function DraggableCard({ card, id, like }) {
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    transform,
-    transition,
-  } = useSortable({ id });
+export default function DraggableCard({ card, id, onUnlike, isLiked }) {
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({ id });
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -19,7 +14,7 @@ export default function DraggableCard({ card, id, like }) {
 
   return (
     <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-      <RecipeReviewCard card={card} like={like}/>
+      <RecipeReviewCard card={card} onLike={onUnlike} isLiked={isLiked} />
     </div>
   );
 }
