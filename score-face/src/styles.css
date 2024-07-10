@@ -10,12 +10,13 @@ body {
   background-color: rgb(56, 58, 58);
   height: 100px;
   color: azure;
-  /* width: 100%; */
   display: flex;
   gap: 2rem;
   justify-content: space-between;
   align-items: stretch;
   padding: 0 2rem;
+  position: fixed;
+  width: 100%;
 }
 
 .nav_title {
@@ -24,7 +25,6 @@ body {
 
 .navbar ul {
   background-color: rgb(56, 58, 58);
-
   padding: 0;
   margin: 0;
   list-style: none;
@@ -55,22 +55,16 @@ body {
   color: aquamarine;
 }
 
+.titleSection {
+  margin-top: 100px;
+}
+
 .container {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 75px;
-  margin-top: 40px;
+  gap: 50px 70px;
   margin-bottom: 40px;
-}
-
-.content {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 70px;
-  position: absolute;
-  top: 250px;
 }
 
 @media (max-width: 400px) {

@@ -14,6 +14,8 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { CSS } from "@dnd-kit/utilities";
+import { useSortable } from "@dnd-kit/sortable";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -26,8 +28,16 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function RecipeReviewCard({ card, onLike, isLiked }) {
+export default function RecipeReviewCard({ card, onLike, isLiked, id }) {
   const [expanded, setExpanded] = React.useState(false);
+
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({ id });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
 
   const handleClickLike = () => {
     onLike(card);
@@ -38,32 +48,36 @@ export default function RecipeReviewCard({ card, onLike, isLiked }) {
   };
 
   return (
-    <Card sx={{ maxWidth: 225 }}>
-      <CardHeader
-        avatar={
-          <Avatar sx={{ bgcolor: blueGrey[700] }} aria-label="recipe">
-            T
-          </Avatar>
-        }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
-        title={card.strLeague}
-        // subheader="September 14, 2016"
-      />
-      <CardMedia
-        component="img"
-        height="250"
-        sx={{ bgcolor: amber[200] }}
-        image={
-          card.strBadge
-            ? card.strBadge
-            : "https://p.turbosquid.com/ts-thumb/G1/DmZpF4/dj/soccerballold_ps_01/jpg/1636720870/2048x1536/fit_q99/013052a47aa87ac0780a5c34a53a659a8ee47140/soccerballold_ps_01.jpg"
-        }
-        alt="Paella dish"
-      />
+    <Card sx={{ maxWidth: 225, minHeight: 225 }}>
+      <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
+        <CardHeader
+          avatar={
+            <Avatar sx={{ bgcolor: blueGrey[700] }} aria-label="recipe">
+              T
+            </Avatar>
+          }
+          action={
+            <IconButton aria-label="settings">
+              <MoreVertIcon />
+            </IconButton>
+          }
+          title={card.strLeague}
+          // subheader="September 14, 2016"
+        />
+
+        <CardMedia
+          component="img"
+          height="250"
+          sx={{ bgcolor: amber[200] }}
+          image={
+            card.strBadge
+              ? card.strBadge
+              : "https://p.turbosquid.com/ts-thumb/G1/DmZpF4/dj/soccerballold_ps_01/jpg/1636720870/2048x1536/fit_q99/013052a47aa87ac0780a5c34a53a659a8ee47140/soccerballold_ps_01.jpg"
+          }
+          alt="Paella dish"
+        />
+      </div>
+
       <CardActions disableSpacing>
         <IconButton
           aria-label="add to favorites"

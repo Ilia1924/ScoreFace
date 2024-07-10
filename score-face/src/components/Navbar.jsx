@@ -16,7 +16,6 @@ export default function Navbar() {
 }
 
 function LinkToPart({ to, children, ...props }) {
-  // const path = window.location.pathname;
   const resovedPath = useResolvedPath(to);
   const isActive = useMatch({ path: resovedPath.pathname, end: true });
   return (
