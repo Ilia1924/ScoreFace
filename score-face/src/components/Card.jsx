@@ -16,6 +16,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { CSS } from "@dnd-kit/utilities";
 import { useSortable } from "@dnd-kit/sortable";
+import { Link } from "react-router-dom";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -48,62 +49,64 @@ export default function RecipeReviewCard({ card, onLike, isLiked, id }) {
   };
 
   return (
-    <Card sx={{ maxWidth: 225, minHeight: 225 }}>
-      <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-        <CardHeader
-          avatar={
-            <Avatar sx={{ bgcolor: blueGrey[700] }} aria-label="recipe">
-              T
-            </Avatar>
-          }
-          action={
-            <IconButton aria-label="settings">
-              <MoreVertIcon />
-            </IconButton>
-          }
-          title={card.strLeague}
-          // subheader="September 14, 2016"
-        />
+    <Link to={`/choiceLeage/${card?.idLeague}`}>
+      <Card sx={{ maxWidth: 225, minHeight: 225 }}>
+        <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
+          <CardHeader
+            avatar={
+              <Avatar sx={{ bgcolor: blueGrey[700] }} aria-label="recipe">
+                T
+              </Avatar>
+            }
+            action={
+              <IconButton aria-label="settings">
+                <MoreVertIcon />
+              </IconButton>
+            }
+            title={card.strLeague}
+            // subheader="September 14, 2016"
+          />
 
-        <CardMedia
-          component="img"
-          height="250"
-          sx={{ bgcolor: amber[200] }}
-          image={
-            card.strBadge
-              ? card.strBadge
-              : "https://p.turbosquid.com/ts-thumb/G1/DmZpF4/dj/soccerballold_ps_01/jpg/1636720870/2048x1536/fit_q99/013052a47aa87ac0780a5c34a53a659a8ee47140/soccerballold_ps_01.jpg"
-          }
-          alt="Paella dish"
-        />
-      </div>
+          <CardMedia
+            component="img"
+            height="250"
+            sx={{ bgcolor: amber[200] }}
+            image={
+              card.strBadge
+                ? card.strBadge
+                : "https://p.turbosquid.com/ts-thumb/G1/DmZpF4/dj/soccerballold_ps_01/jpg/1636720870/2048x1536/fit_q99/013052a47aa87ac0780a5c34a53a659a8ee47140/soccerballold_ps_01.jpg"
+            }
+            alt="Paella dish"
+          />
+        </div>
 
-      <CardActions disableSpacing>
-        <IconButton
-          aria-label="add to favorites"
-          onClick={handleClickLike}
-          sx={isLiked ? { color: red[500] } : { color: amber[500] }}
-        >
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
-        <ExpandMore
-          expand={expanded}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </ExpandMore>
-      </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>Method:</Typography>
-          <Typography paragraph>{card.strDescriptionEN}</Typography>
-        </CardContent>
-      </Collapse>
-    </Card>
+        <CardActions disableSpacing>
+          <IconButton
+            aria-label="add to favorites"
+            onClick={handleClickLike}
+            sx={isLiked ? { color: red[500] } : { color: amber[500] }}
+          >
+            <FavoriteIcon />
+          </IconButton>
+          <IconButton aria-label="share">
+            <ShareIcon />
+          </IconButton>
+          <ExpandMore
+            expand={expanded}
+            onClick={handleExpandClick}
+            aria-expanded={expanded}
+            aria-label="show more"
+          >
+            <ExpandMoreIcon />
+          </ExpandMore>
+        </CardActions>
+        <Collapse in={expanded} timeout="auto" unmountOnExit>
+          <CardContent>
+            <Typography paragraph>Method:</Typography>
+            <Typography paragraph>{card.strDescriptionEN}</Typography>
+          </CardContent>
+        </Collapse>
+      </Card>
+    </Link>
   );
 }

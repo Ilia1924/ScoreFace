@@ -15,8 +15,10 @@ body {
   justify-content: space-between;
   align-items: stretch;
   padding: 0 2rem;
+  top: 0;
   position: fixed;
   width: 100%;
+  z-index: 9999;
 }
 
 .nav_title {
@@ -56,14 +58,24 @@ body {
 }
 
 .titleSection {
-  margin-top: 100px;
+  margin-top: 120px;
+  margin-left: 40px;
+}
+
+.lastChoiseSection {
+  display: flex;
+  margin: 40px 40px;
 }
 
 .container {
+  margin: 10px;
+}
+
+.content {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 50px 70px;
+  gap: 50px 60px;
   margin-bottom: 40px;
 }
 

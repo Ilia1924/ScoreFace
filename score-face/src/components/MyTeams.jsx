@@ -23,7 +23,7 @@ export default function MyTeams({ likedAppCards, setLikedAppCards, onLike }) {
   return (
     <>
       <div className="titleSection">
-        <h1>xnkfnsol</h1>
+        <h1>Teams</h1>
       </div>
       <div className="container">
         {likedAppCards.length ? (

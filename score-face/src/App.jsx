@@ -5,6 +5,7 @@ import GoingNow from "./components/GoingNowPage";
 import HomePage from "./components/HomePage";
 import { Route, Routes } from "react-router-dom";
 import React, { useState } from "react";
+import CardTeams from "./components/CardTeams";
 
 function App() {
   const [likedAppCards, setLikedAppCards] = useState([]);
@@ -12,6 +13,7 @@ function App() {
   const handleLike = (card) => {
     setLikedAppCards((prev) => {
       if (prev.some((c) => c.idLeague === card.idLeague)) {
+        console.log('mi tut nepravilno rabotaem');
         return prev.filter((c) => c.idLeague !== card.idLeague);
       } else {
         return [...prev, card];
@@ -26,7 +28,9 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<HomePage onLike={handleLike} likedAppCards={likedAppCards} />}
+            element={
+              <HomePage onLike={handleLike} likedAppCards={likedAppCards} />
+            }
           />
           <Route
             path="/teams"
@@ -39,6 +43,7 @@ function App() {
             }
           />
           <Route path="/info" element={<About />} />
+          <Route path="/choiceLeage/:teamsLeagueId" element={<CardTeams />} />
           <Route path="/translations" element={<GoingNow />} />
         </Routes>
       </div>
