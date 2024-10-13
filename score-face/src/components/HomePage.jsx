@@ -9,7 +9,8 @@ import axios from "axios";
 import { bgcolor, height, width, paddingRight } from "@mui/system";
 
 const BASE_URL =
-  "https://www.thesportsdb.com/api/v1/json/3/all_leagues.php?s=Soccer";
+  // "https://www.thesportsdb.com/api/v1/json/3/all_leagues.php?s=Soccer";
+  "https://www.thesportsdb.com/api/v1/json/3/search_all_leagues.php?c=England&s=Soccer";
 
 export default function HomePage({ onLike, likedAppCards }) {
   const [data, setData] = useState([]);
@@ -19,10 +20,12 @@ export default function HomePage({ onLike, likedAppCards }) {
   useEffect(() => {
     axios
       .get(BASE_URL)
-      .then(function (response) {
-        const soccerLeagues = response.data.leagues.filter(
-          (league) => league.strSport === "Soccer"
-        );
+      .then(function (response) {;
+        // const soccerLeagues = response.data.leagues.filter( // ===> https://www.thesportsdb.com/api/v1/json/3/all_leagues.php?s=Soccer
+        //   (league) => league.strSport === "Soccer"
+        // );
+
+        const soccerLeagues = response.data.countries;
         setData(soccerLeagues);
       })
       .catch(function (error) {
@@ -33,7 +36,6 @@ export default function HomePage({ onLike, likedAppCards }) {
   const handleDelete = () => {
     console.log("ya ydalilsya");
   };
-
 
   return (
     <>

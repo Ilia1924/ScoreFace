@@ -64,7 +64,6 @@ export default function RecipeReviewCard({ card, onLike, isLiked, id }) {
               </IconButton>
             }
             title={card.strLeague}
-            // subheader="September 14, 2016"
           />
 
           <CardMedia
@@ -102,7 +101,6 @@ export default function RecipeReviewCard({ card, onLike, isLiked, id }) {
         </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>
-            <Typography paragraph>Method:</Typography>
             <Typography paragraph>{card.strDescriptionEN}</Typography>
           </CardContent>
         </Collapse>

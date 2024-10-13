@@ -1,20 +1,21 @@
-import React, {useEffect} from 'react';
-import { useParams } from "react-router";
+import React, { useEffect, useId, useState } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
+import RecipeReviewCard from "./Card";
 
 
 export default function CardTeams() {
   const { teamsLeagueId } = useParams();
-  console.log(teamsLeagueId);
+  const [seasons, setSeasons] = useState([]);
 
-  const choiceApi = `https://www.thesportsdb.com/api/v1/json/3/all_leagues.php?`;
-// const choiceApi = `https://www.thesportsdb.com/api/v1/json/3/searchloves.php?u=zag`;
+  //   const choiceApi = `https://www.thesportsdb.com/api/v1/json/3/all_leagues.php?`;
+  const choiceApi = `https://www.thesportsdb.com/api/v1/json/3/search_all_seasons.php?id=${teamsLeagueId}`;
 
   useEffect(() => {
     axios
       .get(choiceApi)
       .then(function (response) {
-       console.log('3', response);
+        setSeasons(response.data.seasons);
       })
       .catch(function (error) {
         // setError(error);
@@ -22,8 +23,11 @@ export default function CardTeams() {
   }, []);
 
   return (
-    <>
-      <div style={{ marginTop: "200px" }}>{teamsLeagueId}</div>
-    </>
+    <div style={{ marginTop: "100px" }}>
+      {seasons?.map((season) => (
+        <div key={season.strSeason}>{season.strSeason}</div>
+    //    <RecipeReviewCard id={teamsLeagueId} season={season} />
+      ))}
+    </div>
   );
 }
